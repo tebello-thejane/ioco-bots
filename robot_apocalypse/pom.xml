@@ -14,7 +14,7 @@
     <name>robot_apocalypse</name>
     <description>IOCO Robot Apocalypse API</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>14</java.version>
     </properties>
     <dependencies>
         <dependency>
