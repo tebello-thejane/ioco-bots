@@ -1,6 +1,6 @@
 package com.ioco.bots.tebello.robot_apocalypse.config;
 
-import com.ioco.bots.tebello.robot_apocalypse.repositories.SurvivorRepository;
+import com.ioco.bots.tebello.robot_apocalypse.repository.SurvivorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -14,11 +14,11 @@ public class LoadDummyData {
     @Bean
     CommandLineRunner initDatabase(SurvivorRepository repository) {
         return args -> {
-            log.info("Preloading dummy survivor data");
+            log.info("Preloading dummy data");
             IntStream
-                    .rangeClosed(0, 100)
-                    .forEach(value -> repository.save(Mockers.mockSurvivor()));
-            log.info(Mockers.mockSurvivor().toString());
+                    .rangeClosed(1, 100)
+                    .forEach(__ -> repository.save(Mockers.mockSurvivor()));
+
             log.info("Done!");
         };
     }

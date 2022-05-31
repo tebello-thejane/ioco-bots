@@ -1,9 +1,9 @@
 package com.ioco.bots.tebello.robot_apocalypse.config;
 
-import com.ioco.bots.tebello.robot_apocalypse.entities.Location;
-import com.ioco.bots.tebello.robot_apocalypse.entities.Survivor;
+import com.ioco.bots.tebello.robot_apocalypse.entity.Location;
+import com.ioco.bots.tebello.robot_apocalypse.entity.Survivor;
+import org.apache.commons.lang3.RandomStringUtils;
 
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -36,7 +36,7 @@ public class Mockers {
         final Map<Survivor.Resource, Float> ret = new HashMap<>();
 
         IntStream.rangeClosed(1, RAND.nextInt(Survivor.Resource.values().length))
-                .forEach(value -> resources.add(mockResource()));
+                .forEach(__ -> resources.add(mockResource()));
 
         resources.forEach(resource -> ret.put(resource, RAND.nextFloat() * 20));
 
@@ -44,12 +44,7 @@ public class Mockers {
     }
 
     static String mockString(int len) {
-        final byte[] nameArray = new byte[len];
-
-        IntStream.range(0, len).forEach(value -> {
-            nameArray[value] = (byte) (RAND.nextInt(0x5A - 0x41) + 0x41);
-        });
-        return new String(nameArray, StandardCharsets.UTF_8);
+        return RandomStringUtils.randomAlphanumeric(len);
     }
 
     static Location dummyLocation() {
