@@ -1,4 +1,4 @@
-package com.ioco.bots.tebello.robot_apocalypse.entity;
+package com.ioco.bots.tebello.robot_apocalypse.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

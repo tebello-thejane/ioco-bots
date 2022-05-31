@@ -14,12 +14,12 @@ public class LoadDummyData {
     @Bean
     CommandLineRunner initDatabase(SurvivorRepository repository) {
         return args -> {
-            log.info("Preloading dummy data");
+            log.info("Preloading dummy Survivor data");
             IntStream
                     .rangeClosed(1, 100)
                     .forEach(__ -> repository.save(Mockers.mockSurvivor()));
 
-            log.info("Done!");
+            log.info("Done preloading dummy Survivor data");
         };
     }
 }

@@ -1,9 +1,10 @@
-package com.ioco.bots.tebello.robot_apocalypse.entity;
+package com.ioco.bots.tebello.robot_apocalypse.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldNameConstants
 @Table(name = "survivors")
 public class Survivor {
 
