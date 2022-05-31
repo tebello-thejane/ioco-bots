@@ -2,13 +2,11 @@ package com.ioco.bots.tebello.robot_apocalypse.entities;
 
 import lombok.Data;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
+@Table(name = "robots")
 public class Robot {
 
     public enum Category {
