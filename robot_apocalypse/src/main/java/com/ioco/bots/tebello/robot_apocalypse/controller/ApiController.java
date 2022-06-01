@@ -52,7 +52,7 @@ public class ApiController {
 
     @PatchMapping("/survivors/{id}/location/{long}/{lat}")
     @Operation(summary = "Update location of survivor", tags = {"survivors"})
-    public Survivor updateSurvivorInfected(
+    public Survivor updateSurvivorLocation(
             @PathVariable("id") Long survivorId,
             @PathVariable("long") float longitude,
             @PathVariable("lat") float latitude
@@ -66,5 +66,4 @@ public class ApiController {
 
         return survivorRepository.save(theSurvivor);
     }
-
 }

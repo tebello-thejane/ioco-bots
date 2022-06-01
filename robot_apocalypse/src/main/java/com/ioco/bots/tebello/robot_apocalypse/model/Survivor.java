@@ -1,9 +1,7 @@
 package com.ioco.bots.tebello.robot_apocalypse.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
@@ -14,6 +12,7 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain = true)
 @FieldNameConstants
 @Table(name = "survivors")
 public class Survivor {
@@ -24,6 +23,7 @@ public class Survivor {
 
     @Id
     @GeneratedValue
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     private String name, gender;

@@ -103,9 +103,4 @@ public class ReportController {
         }
         return robotRepository.findAll();
     }
-
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
-    }
 }
