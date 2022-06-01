@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class Mockers {
-    final static Random RAND = new Random();
+    private final static Random RAND = new Random();
 
     public static Survivor mockSurvivor() {
         return Survivor.builder()
@@ -23,7 +23,7 @@ public class Mockers {
                 .age(RAND.nextInt(31) + 20)
                 .infected(RAND.nextBoolean())
                 .resources(mockResources())
-                .location(dummyLocation())
+                .location(mockLocation())
                 .build();
     }
 
@@ -47,7 +47,7 @@ public class Mockers {
         return RandomStringUtils.randomAlphanumeric(len);
     }
 
-    public static Location dummyLocation() {
+    public static Location mockLocation() {
         return Location.builder()
                 .longitude(180 - RAND.nextFloat() * 360)
                 .latitude(90 - RAND.nextFloat() * 180)

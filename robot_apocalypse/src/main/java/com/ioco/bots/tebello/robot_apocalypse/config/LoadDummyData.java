@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 @Slf4j
 public class LoadDummyData {
     @Bean
-    CommandLineRunner initDatabase(SurvivorRepository repository) {
+    public CommandLineRunner loadDummySurvivorData(SurvivorRepository repository) {
         return args -> {
             log.info("Preloading dummy Survivor data");
             IntStream

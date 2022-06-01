@@ -8,16 +8,16 @@ import com.ioco.bots.tebello.robot_apocalypse.repository.SurvivorRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -77,24 +77,23 @@ public class ReportController {
     private static boolean robotsFetched = false;
 
     @GetMapping("/allrobots")
-
     @Operation(summary = "List of all robots", tags = {"reports"})
     public List<Robot> getRobots() {
         if (!robotsFetched) {
             log.info("Fetching Robot data from web");
 
-            final Robot[] robots = WebClient.create("https://robotstakeover20210903110417.azurewebsites.net/robotcpu")
+            final Robot[] robots = WebClient
+                    .create("https://robotstakeover20210903110417.azurewebsites.net/robotcpu")
                     .get()
-                    .uri("")
                     .retrieve()
-                    .bodyToMono(Robot[].class)
+                    .bodyToMono(Robot[].class).metrics()
                     .block();
 
             assert robots != null;
 
             robotRepository.saveAll(
                     Stream.of(robots)
-                            .map(robot -> robot.setLocation(Mockers.dummyLocation()))
+                            .map(robot -> robot.setLocation(Mockers.mockLocation()))
                             .collect(Collectors.toList())
             );
 
@@ -109,19 +108,4 @@ public class ReportController {
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
     }
-//
-//    @Bean
-//    public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
-//        return args -> {
-//            final Robot[] quote = restTemplate.getForObject(
-//                    "https://robotstakeover20210903110417.azurewebsites.net/robotcpu", Robot[].class);
-//            assert quote != null;
-//
-//            log.info("##### done loading robot data");
-//
-////            Arrays.stream(quote).
-//
-////            robotRepository.saveAll(List.of(quote));
-//        };
-//    }
 }
