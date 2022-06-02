@@ -36,13 +36,7 @@ public class ReportController {
     @Operation(summary = "Percentage of survivors who are infected", tags = {"reports"})
     public float getPercentageSurvivorsInfected() {
 
-        final long countInfected = survivorRepository
-                .count(Example.of(Survivor.builder()
-                                .infected(true)
-                                .build(),
-                        ExampleMatcher.matching()
-                                .withIgnorePaths(Survivor.Fields.age)) //Since age is non-nullable
-                );
+        final long countInfected = survivorRepository.countByInfected(true);
 
         return 100 * ((float) countInfected) / ((float) survivorRepository.count());
     }
@@ -51,13 +45,7 @@ public class ReportController {
     @Operation(summary = "Percentage of survivors who are not infected", tags = {"reports"})
     public float getPercentageSurvivorsNonInfected() {
 
-        final long countNonInfected = survivorRepository
-                .count(Example.of(Survivor.builder()
-                                .infected(false)
-                                .build(),
-                        ExampleMatcher.matching()
-                                .withIgnorePaths(Survivor.Fields.age)) //Since age is non-nullable
-                );
+        final long countNonInfected = survivorRepository.countByInfected(false);
 
         return 100 * ((float) countNonInfected) / ((float) survivorRepository.count());
     }
